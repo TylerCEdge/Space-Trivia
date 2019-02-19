@@ -1,0 +1,51 @@
+body {
+    background: url(../images/background.jpg);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+}
+
+.container {
+    background-color: antiquewhite;
+    height: 700px;
+    width: 500px;
+    opacity: .8;
+    padding: 30px;
+    border-radius: 25px;
+    border: 1px solid gray;
+}
+
+.quizArea {
+    background-color: gray;
+    width: 440px;
+    height: 440px;
+    border-radius: 25px;
+    padding: 30px;
+    color: beige;
+}
+
+.scoreArea {
+    width: 100px;
+    height: 50px;
+    background-color: antiquewhite;
+    opacity: .8;
+    border-radius: 10px;
+}
+
+.startBtn {
+    background-color: crimson;
+    color: blanchedalmond;
+
+}
+
+.line {
+    border-top: 1px solid grey;
+    width: 100% !important;
+}
+
+.space {
+    height: 10px;
+}
+
+.timer {
+    padding: 20px;
+}
