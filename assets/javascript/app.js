@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     var score = 0;
 
-    var questions = [
+    var questionsList = [
         "Which one is not a type of galaxy?",
         "What process fuels the sun?",
         "What galaxy is made of old stars?"];
@@ -22,5 +22,22 @@ $(document).ready(function () {
     var answers1 = ["Precipitation", "Nuculear Fusion", "Condensation", "Photosynthesis"];
     var answers2 = ["Spiral", "Irregular", "Lenticular", "Elliptical"];
 
-    
+
+
+    function startGame () {
+        $("#questions").text(questionsList[0]);
+        $("#option1").text(answers0[0]);
+        $("#option2").text(answers0[1]);
+        $("#option3").text(answers0[2]);
+        $("#option4").text(answers0[3]);
+    }
+
+    $(".startBtn").on("click", function() {
+        startGame();
+        $("#vanish").hide();
+    });
+
+
+
+
 });
