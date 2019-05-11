@@ -1,228 +1,156 @@
-var user = {
-    isStarted: false,
-    isPaused: false,
-    isDone: false,
-    timesRight: 0,
-    timesWrong: 0
-}
-
-var questionsArray = [];
-var activeQuestion;
-var gameStatus = [];
-
-// var questionTimer;
-// var waitTimer;
-// var timeQuestion = 10000;
-// var timeWait = 5000;
-// var time = 0;
-// var counter;
-
-// var timeProgress = {
-//     start: function () {
-//         counter = setInterval(timeProgress.count, 1000);
-//     },
-//     stop: function () {
-//         clearInterval(counter);
-//         time = 0;
-//     },
-//     count: function () {
-//         time++;
-//         console.log(time);
-//     }
-// }
-
-function startGame() {
-    player.isStarted = !player.isStarted;
-    $("#questions").text(activeQuestion.question);
-    // gameStatus[];
-    player.timesRight = 0;
-    player.timesWrong = 0;
-    questionsArray = spawnQuestionsArray();
-}
-
-$(".startBtn").on("click", function() {
-    startGame();
-    $("#vanish").hide();
+$('#start').on('click', function () {
+    game.start();
 });
-console.log(activeQuestion)
 
-function spawnQuestionsArray() {
-    function qObject(question, answers, cAnswer, uAnswer, isRight, timeCheck) {
-        this.question = question;
-        this.answers = answers;
-        this.cAnswer = cAnswer;
-        this.uAnswer = uAnswer;
-        this.isRight = isRight;
-        this.timeCheck = timeCheck;
+$(document).on('click','#end',function(){
+    game.done();
+});
 
+var questions = [{
+    question: "What was the first full length CGI movie?",
+    answers: ["A Bugs Life", "Monsters Inc", "Toy Story", "The Lion King"],
+    correctAnswer: "Toy Story"
+}, {
+    question: "Which of these in NOT a name of one of the Spice Girls?",
+    answers: ["Sporty Spice", "Fred Spice", "Scary Spice", "Posh Spice"],
+    correctAnswer: "Fred Spice"
+}, {
+    question: "Which NBA team won the most titles in the 90s?",
+    answers: ["New York Knicks", "Portland Trailblazers", "Los Angeles Lakers", "Chicago Bulls"],
+    correctAnswer: "Chicago Bulls"
+}, {
+    question: 'Which group released the hit song, "Smells Like Teen Spirit?"',
+    answers: ["Nirvana", "Backstreet Boys", "The Offspring", "No Doubt"],
+    correctAnswer: "Nirvana"
+}, {
+    question: 'Which popular Disney movie featured the song, "The Circle of Life?',
+    answers: ["Aladdin", "Hercules", "Mulan", "The Lion King"],
+    correctAnswer: "The Lion King"
+}, {
+    question: "What is your quest?",
+    answers: ["To Take over The World", "To Seek The Holy Grail", "Victory Is Mine", "Giggity"],
+    correctAnswer: "To Seek The Holy Grail"
+}, {
+    question: "What is your favorite color?",
+    answers: ["Blue", "Green", "Red", "Yellow"],
+    correctAnswer: "Blue"
+}, {
+    question: "What is the best truck brand?",
+    answers: ["Ford", "Chevy", "Dodge", "GMC"],
+    correctAnswer: "Chevy"
+}, {
+    question: "What is the best Linux OS?",
+    answers: ["Elementary OS", "Linux Mint", "Arch Linux", "Kali Linux"],
+    correctAnswer: "Kali Linux"
+}, {
+    question: "What is the best 007 game?",
+    answers: ["Nightfire", "GoldenEye", "From Russia With Love", "The World Is Not Enough"],
+    correctAnswer: "GoldenEye"
+}];
+
+var game = {
+    correct: 0,
+    incorrect: 0,
+    counter: 60,
+    countdown: function () {
+        game.counter--;
+        $('#counter').html(game.counter);
+        if (game.counter <= 0) {
+            console.log("time is up");
+            game.done();
+        }
+    },
+    start: function () {
+        timer = setInterval(game.countdown, 1000);
+        $('#subwrapper').prepend('<h2>Time Remaining: <span id="counter">120</span> Seconds</h2>');
+        $('#start').remove();
+        for (var i = 0; i < questions.length; i++) {
+            $('#subwrapper').append('<h2>' + questions[i].question + '</h2>');
+            for (var j = 0; j < questions[i].answers.length; j++) {
+                $("#subwrapper").append("<input type='radio' name='question-" + i + "' value='" + questions[i].answers[j] + "'>" + questions[i].answers[j]);
+            }
+        }
+        $('#subwrapper').append('<br><br><button id="end">DONE</button>');
+    },
+    done: function () {
+        $.each($("input[name='question-0']:checked"), function () {
+                if ($(this).val() == questions[0].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-1']:checked"), function () {
+                if ($(this).val() == questions[1].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-2']:checked"), function () {
+                if ($(this).val() == questions[2].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-3']:checked"), function () {
+                if ($(this).val() == questions[3].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-4']:checked"), function () {
+                if ($(this).val() == questions[4].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-5']:checked"), function () {
+                if ($(this).val() == questions[5].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-6']:checked"), function () {
+                if ($(this).val() == questions[6].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-7']:checked"), function () {
+                if ($(this).val() == questions[7].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-8']:checked"), function () {
+                if ($(this).val() == questions[8].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            }),
+            $.each($("input[name='question-9']:checked"), function () {
+                if ($(this).val() == questions[9].correctAnswer) {
+                    game.correct++;
+                } else {
+                    game.incorrect++;
+                }
+            });
+            this.result();
+    },
+    result: function(){
+        clearInterval(timer);
+        $('#subwrapper h2').remove();
+        $('#subwrapper').html("<h2>All Done!</h2>");
+        $('#subwrapper').append("<h3>Correct Answers: " + this.correct + "</h3>");
+        $('#subwrapper').append("<h3>Inorrect Answers: " + this.incorrect + "</h3>");
+        $('#subwrapper').append("<h3>Unanswered: "+(questions.length-(this.incorrect+this.correct))+"</h3>");
     }
-
-    var question0 = new qObject(
-        "Which one is not a type of galaxy?",
-        ["Spiral", "Irregular", "Orbital", "Elliptical", null],
-        2,
-        4,
-        false,
-        false);
-
-    var question1 = new qObject(
-        "What process fuels the sun?",
-        ["Precipitation", "Nuculear Fusion", "Condensation", "Photosynthesis", null],
-        1,
-        4,
-        false,
-        false);
-
-    var question2 = new qObject(
-        "What galaxy is made of old stars?",
-        ["Spiral", "Irregular", "Lenticular", "Elliptical", null],
-        3,
-        4,
-        false,
-        false);
-
-    return questionsArray = [question0, question1, question2];
 }
-
-// function questionLoop() {
-//     for (i = 0; i < questionsArray.length; i++) {
-//         activeQuestion = questionsArray[i];
-//     }
-// }
-
-function selectRandomQuestion(){
-    var randomIndex = Math.floor(Math.random()*questionsArray.length);
-    activeQuestion = questionsArray[randomIndex];
-
-    console.log(question0);
-  
-    // remove question from array.  
-    questionsArray.splice(randomIndex,1);
-  }
-
-// function startGame () {
-//     $("#questions").text(activeQuestion.question);
-    
-// }
-
-// $(".startBtn").on("click", function() {
-//     startGame();
-//     $("#vanish").hide();
-// });
-
-// console.log(activeQuestion)
-
-
-
-
-
-// // <!-- * You'll create a trivia form with multiple choice or true/false options (your choice).
-
-// //     * The player will have a limited amount of time to finish the quiz.
-
-// //     * The game ends when the time runs out. The page will reveal the number of questions that players answer correctly
-// //     and incorrectly.
-
-// //     * Don't let the player pick more than one answer per question.
-
-// //     * Don't forget to include a countdown timer. -->
-
-// $(document).ready(function () {
-
-//     var num = 0;
-//     var time = 30;
-//     var timer;
-//     var isSelected = false;
-//     var correct = 0;
-//     var incorrect = 0;
-//     var unanswered = 0;
-//     var userGuess;
-
-// // questions list
-
-//     var questionsList = [
-//         "Which one is not a type of galaxy?",
-//         "What process fuels the sun?",
-//         "What galaxy is made of old stars?"];
-
-// // first question aqnswers
-
-//     var answers0 = [
-//         "Spiral", 
-//         "Irregular", 
-//         "Orbital", 
-//         "Elliptical"
-//     ];
-
-// // second question answers
-
-//     var answers1 = [
-//         "Precipitation", 
-//         "Nuculear Fusion", 
-//         "Condensation", 
-//         "Photosynthesis"
-//     ];
-
-// // third question answers
-
-//     var answers2 = [
-//         "Spiral", 
-//         "Irregular", 
-//         "Lenticular", 
-//         "Elliptical"
-//     ];
-
-// // correct answers array
-
-//     var canswers = [
-//         "Orbital", 
-//         "Nuclear Fusion", 
-//         "Elliptical"
-//     ] 
-
-// // function to start game and populate first question need to configure to push
-
-    // function startGame () {
-    //     $("#questions").html(questionsList[0]);
-    //     $("#option1").html(answers0[0]);
-    //     $("#option2").html(answers0[1]);
-    //     $("#option3").html(answers0[2]);
-    //     $("#option4").html(answers0[3]);
-    // }
-
-    // $(".startBtn").on("click", function() {
-    //     startGame();
-    //     $("#vanish").hide();
-    // });
-
-//     $(".uAnswer").on("click", function() {
-//         userGuess = this.val().trim();
-//         console.log(this);
-//     });
-
-// // function for button clicks in answer field
-
-//     function userGuess () {
-
-//         if(userGuess.val() === canswers[num]) {
-//             correct++;
-//             isSelected = true;
-//             console.log("correct!");
-//             console.log("uAnswer")
-
-//         }
-//         else {
-//             incorrect++;
-//             isSelected = true;
-//             console.log("wrong!");
-//         }
-//     }
-
-//     $(".uAnswer").on("click", function() {
-//         userGuess();
-//     });
-
-
-
-
-// });
